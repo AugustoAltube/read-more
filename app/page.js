@@ -6,12 +6,12 @@ import Image from 'next/image';
 export default function Home() {
 
   return (
-    <main className="flex min-h-screen flex-col items-center bg-white">
+    <main className="flex min-h-screen flex-col items-center justify-between bg-white">
 
       {/*<div className="min-w-[60%] min-h-[80] bg-[#E6E5FD] rounded-b-full flex-start "></div> */}
 
       <div className="relative w-full h-[20vh] overflow-hidden z-10">
-        <div className="absolute bottom-0 w-full aspect-[2/1] rounded-b-full bg-[#E6E5FD]"></div>
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[200%] aspect-[2/1] rounded-b-full bg-[#E6E5FD] "></div>
       </div>
 
       {/*
@@ -54,8 +54,8 @@ export default function Home() {
       </form>
         
 
-      <div className="absolute bottom-0 w-full h-[20vh] overflow-hidden z-10">
-        <div className="w-full aspect-[2/1] rounded-t-full bg-[#FCECE8]"></div>
+      <div className="relative w-full h-[20vh] overflow-hidden z-10">
+        <div className="absolute top-0 w-[200%] left-1/2 -translate-x-1/2 aspect-[2/1] rounded-t-full bg-[#FCECE8]"></div>
       </div>
 
 
