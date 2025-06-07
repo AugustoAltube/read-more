@@ -4,6 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
+async function getUsuario() {
+  const response = await fetch("http://localhost:2000/usuario");
+  const json = await response.json();
+  console.log(response);
+}
+
 //Declarar el GET en front
 export default function Home() {
   const [data, setData] = useState("No estoy definido");
@@ -18,7 +24,7 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const postData = async () => {
     try {
-      const response = await fetch("http://localhost:2000/casa", {
+      const response = await fetch("http://localhost:2000/verificarUsuario", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -28,8 +34,9 @@ export default function Home() {
           password: password,
         }),
       });
-      const result = await response.json();
+      const result = await response.json(); //No estoy usando el result porque es un objeto
       console.log(response);
+      if(response.status === 200) {window.location.href = "/blanco"};
     }
     catch (error) {
       console.error(error);
@@ -60,6 +67,7 @@ export default function Home() {
       </div>
 
       <Link className="text-black" href="/blanco">Blanco</Link>
+      <button className="text-black" onClick={() => { getUsuario() }}>GET usuario</button>
       <Image
         src="/logoSinBorde.png" // Asegurate de que la imagen exista en /public
         alt="Mi foto"
@@ -67,7 +75,7 @@ export default function Home() {
         height={200}
         className=""
       />
-     
+
       {/* aca puse un prototipo de login */}
       <form className="w-full max-w-sm mt-6 flex flex-col  border-solid border-gray border-2 rounded-sm p-4">
         <h2 className="text-black font-mono font-light">Email</h2>
@@ -85,7 +93,9 @@ export default function Home() {
           className="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 text-black"
         />
         <button
-          onClick={() => { postData() }}
+          onClick={() => {
+            postData();
+          }}
           type="submit"
           className="bg-[#7060F7] text-white py-2 rounded-md hover:bg-[#4A35FB] transition-colors flex items-center justify-center gap-2 mb-4"
         >
